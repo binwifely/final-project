@@ -1,3 +1,5 @@
+from pygame import*
+
 class Button():
     def __init__(self, x, y, width, height, button_image_name):
         self.image = transform.scale(image.load(button_image_name), (width, height))
@@ -8,10 +10,11 @@ class Button():
         self.clicked = False
 
     def draw(self, window):
-        pose = mouse.get_pose()
+        pos = mouse.get_pos()
         action = False
+        window.blit(self.image, (self.rect.x, self.rect.y))
         
-        if self.rect.collidepoint(pose):
+        if self.rect.collidepoint(pos):
             if mouse.get_pressed()[0] == 1:
                 self.clicked = True
                 action = True
@@ -20,3 +23,4 @@ class Button():
                 self.clicked = False
         
         return action
+    
